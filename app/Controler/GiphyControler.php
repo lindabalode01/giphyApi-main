@@ -1,7 +1,8 @@
 <?php
 namespace App\Controller;
 
-use App\Model\GiphyApi;
+use App\Models\GiphyApi;
+use App\View;
 use GuzzleHttp\Exception\GuzzleException;
 
 class GiphyControler
@@ -15,12 +16,14 @@ class GiphyControler
     /**
      * @throws GuzzleException
      */
-    public function trendingGiphy():array
+    public function trending():View
     {
-        return $this->giphyApi->fetchTrending();
+       $gifs = $this->giphyApi->fetchTrending();
+       return new View('trending', $gifs);
     }
-    public function searchedGiphys():array
+    public function search():View
     {
-        return $this->giphyApi->searchGifs();
+        $gifs = $this->giphyApi->searchGifs();
+        return new View('search', $gifs);
     }
 }

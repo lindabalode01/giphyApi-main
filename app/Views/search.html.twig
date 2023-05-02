@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="">
+<head>
+    <title>Trending Gifs</title>
+    <style>
+        body {
+            background-color: lightgrey;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 50px;
+        }
+        button, input[type="text"], input[type="submit"] {
+            display: block;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+<form action="search" method="GET">
+    <label for="search"> Enter search keyword: </label>
+    <input type="text" id="keyWord" name="">
+    <button type="submit">Search</button>
+</form>
+{% for gif in gifs % %}
+<div>
+    <h3>{ gif.getName() }</h3>
+    <img src="{{ gif.getUrl() }}}" alt="{{ gif.getName() }}">
+</div>
+{% endif %}
+</body>
+</html>

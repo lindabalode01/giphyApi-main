@@ -21,12 +21,12 @@ public function __construct()
     $response = $this->client->get('api.giphy.com/v1/gifs/trending', [
         'query' => [
             'api_key' => $_ENV['API_KEY'],
-            'limit' => 10,
-            'offset' => floor(rand(0, 499))
+            'limit' => 10
+            //'offset' => floor(rand(0, 499))
         ]
     ]);
     $giphyData = json_decode($response->getBody()->getContents());
-    return $this->giphy($giphyData->data);
+    return $this->giphy($giphyData);
 }
 PUBLIC FUNCTION searchGifs():array
 {
@@ -34,21 +34,20 @@ PUBLIC FUNCTION searchGifs():array
         'query' => [
             'api_key' => $_ENV['API_KEY'],
             'Q' => $_GET['keyWord'],
-            'limit' => $_GET['count'],
-            'offset' => floor(rand(0, 499))
+            'limit' => 15
+            //'offset' => floor(rand(0, 499))
         ]
     ]);
     $giphyData = json_decode($response->getBody()->getContents());
-    return $this->giphy($giphyData->data);
+    return $this->giphy($giphyData);
 }
 public function giphy(array $randomGifs): array
 {
     $gifCollection = [];
-    foreach ($randomGifs as $gif)
-    {
-     $gifCollection[]= new Giphy(
+    foreach ($randomGifs as $gif) {
+        $gifCollection[] = new Giphy(
             $gif->title,
-            $gif->images->fixed_width->url
+            $gif->images->original->url
         );
     }
     return $gifCollection;

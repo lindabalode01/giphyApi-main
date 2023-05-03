@@ -17,9 +17,9 @@
     </style>
 </head>
 <body>
-<form action="search" method="GET">
-    <label for="search"> Enter search keyword: </label>
-    <input type="text" id="keyWord" name="">
+<form action="/search" method="GET">
+    <label for="search">Enter search term:</label>
+    <label for="keyWord"></label><input type="text" id="keyWord" name="q">
     <button type="submit">Search</button>
 </form>
 {% for gif in gifs % %}

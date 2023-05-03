@@ -39,7 +39,7 @@ switch ($routeInfo[0]) {
         $controllerName = new $controllerName;
 
         /**@var View $response */
-        echo $twig->render($response->getTemplate().'.html.twig');
+        echo $twig->render($response->getTemplate().'.html.twig', ["gifs" => $response->getGifData()]);
 
         break;
 }
